@@ -39,7 +39,7 @@ public class InsideController {
         return randomInt;
     }
     public Image getRandomPicture(){
-        int index = getRandomNumber(0, 32);
+        int index = getRandomNumber(0, 31);
         String picture = "img/CharacterPic/" + this.pictures[index];
         Image profPic = new Image(Objects.requireNonNull(getClass().getResourceAsStream(picture)));
         return profPic;
@@ -50,11 +50,11 @@ public class InsideController {
     }
 
     public void displayInfo(){
-        nameLabel.setText("Name: " + hrdina.getHeroName());
+        nameLabel.setText(hrdina.getHeroName());
         ageLabel.setText("Age: " + hrdina.getHeroAge());
         goldLabel.setText("Gold: " + hrdina.getHeroGold());
         healthLabel.setText("Health: " + hrdina.getHeroHealth());
-        damageLabel.setText("Damage: " + hrdina.getHeroDamage());
+        damageLabel.setText("Defense: " + hrdina.getHeroDamage());
         armorLabel.setText("Armor: " + hrdina.getHeroArmor());
         profilePicture.setImage(hrdina.getHeroImage());
     }

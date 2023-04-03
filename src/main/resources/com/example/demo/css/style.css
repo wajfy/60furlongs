@@ -1,9 +1,9 @@
 .root{
-    -fx-background-color: #2b3352;
+    -fx-background-color: #0F2A3F;
 
 }
 .label{
-    -fx-text-fill: white;
+    -fx-text-fill: #E4D8CE;
     -fx-font-family: "Lucida Console";
 }
 
@@ -12,12 +12,16 @@
     -fx-alignment: center;
 }
 #Stats{
-    -fx-background-color: #272f4d;
-    -fx-background-radius: 10px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-background-color: #0B1F2E;
+    -fx-border-color: #836273 ;
+    -fx-border-width: 2;
 }
 #profilePicture{
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+#mainContainer{
+    -fx-border-color: #836273 ;
+    -fx-border-width: 2;
 }
 #GameNameLabel{
     -fx-font-size: 40px;
