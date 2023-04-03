@@ -51,6 +51,7 @@ public class StartController {
             scene.getStylesheets().add(css);
             stage.setScene(scene);
             stage.show();
+            System.out.println("Starting game");
         }catch (NumberFormatException e){
             System.out.println("wrong input");
         }catch (Exception e){
