@@ -16,6 +16,6 @@
       <Label fx:id="headLineLabel" layoutX="1.0" layoutY="99.0" prefHeight="17.0" prefWidth="640.0" text="Create Hero Profile" />
       <TextField fx:id="ageInput" layoutX="246.0" layoutY="190.0" promptText="ex. 18" />
       <Label layoutX="198.0" layoutY="194.0" text="Age:" />
-      <Label fx:id="GameNameLabel" layoutX="2.0" layoutY="31.0" prefHeight="17.0" prefWidth="640.0" text="GameName" />
+      <Label fx:id="GameNameLabel" layoutX="2.0" layoutY="31.0" prefHeight="17.0" prefWidth="640.0" text="60Furlongs" />
    </children>
 </AnchorPane>

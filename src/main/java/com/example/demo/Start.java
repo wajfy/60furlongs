@@ -21,7 +21,7 @@ public class Start extends Application {
         String css = Objects.requireNonNull(this.getClass().getResource("css/style.css")).toExternalForm();
         scene.getStylesheets().add(css);
         stage.setScene(scene);
-        stage.setTitle("GameName");
+        stage.setTitle("60Furlongs");
         stage.show();
     }
     public static void main(String[] args) {
