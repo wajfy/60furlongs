@@ -1,0 +1,25 @@
+.root{
+    -fx-background-color: #2b3352;
+
+}
+.label{
+    -fx-text-fill: white;
+    -fx-font-family: "Lucia Console";
+}
+
+#headLineLabel{
+    -fx-font-size: 20px;
+    -fx-alignment: center;
+}
+#Stats{
+    -fx-background-color: #272f4d;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+#profilePicture{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+#GameNameLabel{
+    -fx-font-size: 40px;
+    -fx-alignment: center;
+}
