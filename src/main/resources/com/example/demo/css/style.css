@@ -16,8 +16,9 @@
     -fx-border-color: #836273 ;
     -fx-border-width: 2;
 }
-#profilePicture{
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+#profileBackground{
+    -fx-border-color: #836273 ;
+    -fx-border-width: 2;
 }
 #mainContainer{
     -fx-border-color: #836273 ;
@@ -27,3 +28,14 @@
     -fx-font-size: 40px;
     -fx-alignment: center;
 }
+#ageLabel, #healthLabel, #damageLabel, #armorLabel, #goldLabel, #speedLabel, #intLabel, #charLabel, #heightLabel, #energyLabel, #charLabel{
+    -fx-text-fill: #C79E80;
+}
+
+
+
+
+
+
+
+

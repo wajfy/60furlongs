@@ -21,6 +21,20 @@ public class InsideController {
     Label damageLabel;
     @FXML
     Label armorLabel;
+    @FXML
+    Label intLabel;
+    @FXML
+    Label speedLabel;
+    @FXML
+    Label charLabel;
+    @FXML
+    Label heightLabel;
+    @FXML
+    Label energyLabel;
+
+    @FXML
+    Label dayLabel;
+
 
     @FXML
     ImageView profilePicture;
@@ -33,29 +47,38 @@ public class InsideController {
     };
 
     Hero hrdina;
-
-    public int getRandomNumber(int min, int max){
-        int randomInt = (int)Math.floor(Math.random() * (max - min + 1) + min);
-        return randomInt;
+    int dayNumber = 0;
+    public static int getRandomNumber(int min, int max){
+        return (int)Math.floor(Math.random() * (max - min + 1) + min);
     }
     public Image getRandomPicture(){
         int index = getRandomNumber(0, 31);
         String picture = "img/CharacterPic/" + this.pictures[index];
-        Image profPic = new Image(Objects.requireNonNull(getClass().getResourceAsStream(picture)));
-        return profPic;
+        return new Image(Objects.requireNonNull(getClass().getResourceAsStream(picture)));
     }
     public void createNewHero(String username, int age){
         Image pic = getRandomPicture();
         this.hrdina = new Hero(username, age, pic);
     }
-
     public void displayInfo(){
         nameLabel.setText(hrdina.getHeroName());
-        ageLabel.setText("Age: " + hrdina.getHeroAge());
-        goldLabel.setText("Gold: " + hrdina.getHeroGold());
-        healthLabel.setText("Health: " + hrdina.getHeroHealth());
-        damageLabel.setText("Defense: " + hrdina.getHeroDamage());
-        armorLabel.setText("Armor: " + hrdina.getHeroArmor());
         profilePicture.setImage(hrdina.getHeroImage());
+
+        goldLabel.setText(Integer.toString(hrdina.getHeroGold()));
+        healthLabel.setText(hrdina.getHeroHealth() + "/" + hrdina.getHeroMaxHealth());
+        energyLabel.setText(hrdina.getHeroEnergy() + "/" + hrdina.getHeroMaxEnergy());
+
+        ageLabel.setText(Integer.toString(hrdina.getHeroAge()));
+        heightLabel.setText(Integer.toString(hrdina.getHeroHeight()));
+
+        damageLabel.setText(Integer.toString(hrdina.getHeroDamage()));
+        armorLabel.setText(Integer.toString(hrdina.getHeroArmor()));
+        speedLabel.setText(Integer.toString(hrdina.getHeroSpeed()));
+        intLabel.setText(Integer.toString(hrdina.getHeroIntelligence()));
+        charLabel.setText(Integer.toString(hrdina.getHeroCharisma()));
+    }
+    public void nextDay(){
+        dayNumber++;
+        dayLabel.setText("Day: " + dayNumber);
     }
 }

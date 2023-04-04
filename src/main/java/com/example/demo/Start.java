@@ -14,8 +14,8 @@ public class Start extends Application {
     @Override
 
     public void start(Stage stage) throws IOException {
-        int width = 640;
-        int height = 480;
+        int width = 800;
+        int height = 600;
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login.fxml")));
         Scene scene = new Scene(root, width, height);
         String css = Objects.requireNonNull(this.getClass().getResource("css/style.css")).toExternalForm();

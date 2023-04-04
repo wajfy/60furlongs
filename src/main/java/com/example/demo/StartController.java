@@ -17,8 +17,8 @@ public class StartController {
     private Stage stage;
     private Scene scene;
     private Parent root;
-    int width = 640;
-    int height = 480;
+    int width = 800;
+    int height = 600;
 
 
     @FXML
