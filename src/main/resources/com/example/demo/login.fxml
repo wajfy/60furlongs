@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -10,7 +11,10 @@
 
 <AnchorPane maxHeight="480.0" maxWidth="640.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.StartController">
    <children>
-      <Button fx:id="loginButton" layoutX="348.0" layoutY="347.0" mnemonicParsing="false" onAction="#login" text="Start New Game" />
+      <Button fx:id="loginButton" layoutX="326.0" layoutY="347.0" mnemonicParsing="false" onAction="#login" text="Start New Game">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
       <Label layoutX="277.0" layoutY="252.0" text="Name:" />
       <TextField fx:id="loginInput" layoutX="327.0" layoutY="248.0" promptText="ex. GayLord" />
       <Label fx:id="headLineLabel" layoutY="204.0" prefHeight="17.0" prefWidth="800.0" text="Create Hero Profile" />

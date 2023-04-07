@@ -2,6 +2,8 @@ package com.example.demo;
 
 import javafx.scene.image.Image;
 
+import java.util.Objects;
+
 public class Hero {
     private String heroName;
     private int heroAge;
@@ -36,7 +38,13 @@ public class Hero {
         this.heroIntelligence = InsideController.getRandomNumber(1, 5);
         this.heroCharisma = InsideController.getRandomNumber(1, 5);
         this.heroHeight = InsideController.getRandomNumber(150, 200);
-        this.heroImage = heroImage;
+
+        if(this.heroName.equals("xoxoxo")){
+            this.heroImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("img/test.png")));
+        }else{
+            this.heroImage = heroImage;
+        }
+        System.out.println("Created hero");
     }
 
     public String getHeroName() {

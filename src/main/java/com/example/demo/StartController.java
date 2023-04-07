@@ -34,6 +34,7 @@ public class StartController {
         scene.getStylesheets().add(css);
         stage.setScene(scene);
         stage.show();
+        System.out.println("Welcome");
     }
 
     public void login(ActionEvent event) throws IOException {
@@ -53,6 +54,8 @@ public class StartController {
             stage.show();
             System.out.println("Starting game");
         }catch (NumberFormatException e){
+            loginInput.setText("xoxoxo");
+            ageInput.setText("11");
             System.out.println("wrong input");
         }catch (Exception e){
             System.out.println(e);

@@ -12,22 +12,26 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.InsideController">
    <children>
-      <AnchorPane fx:id="mainContainer" layoutX="15.0" layoutY="15.0" prefHeight="574.0" prefWidth="771.0">
+      <ImageView fx:id="profilePicture" fitHeight="214.0" fitWidth="200.0" layoutX="627.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/CharacterPic/13.png" />
+         </image>
+      </ImageView>
+      <AnchorPane fx:id="profileBackground" layoutX="627.0" layoutY="15.0" prefHeight="214.0" prefWidth="159.0" />
+      <AnchorPane fx:id="mainContainer" layoutX="15.0" layoutY="15.0" prefHeight="569.0" prefWidth="771.0">
          <children>
-            <AnchorPane fx:id="imageBackground" layoutX="423.0" layoutY="27.0" prefHeight="214.0" prefWidth="159.0" />
             <Label fx:id="nameLabel" layoutX="660.0" layoutY="233.0" text="Name:" />
-            <ImageView fx:id="profilePicture" fitHeight="214.0" fitWidth="200.0" layoutX="612.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@img/CharacterPic/13.png" />
-               </image>
-            </ImageView>
-            <AnchorPane fx:id="profileBackground" layoutX="612.0" prefHeight="214.0" prefWidth="159.0" />
             <Label fx:id="dayLabel" layoutX="361.0" layoutY="20.0" text="Day: 0">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button fx:id="nextDayButton" layoutX="354.0" layoutY="519.0" mnemonicParsing="false" onAction="#nextDay" text="Next day" />
+            <Button fx:id="nextDayButton" layoutX="660.0" layoutY="523.0" mnemonicParsing="false" onAction="#nextDay" text="Next day" />
+            <Button fx:id="addSwordButton" layoutX="658.0" layoutY="333.0" mnemonicParsing="false" onAction="#addSword" text="Add Sword" />
+            <TextField fx:id="slotNumber" layoutX="330.0" layoutY="339.0" />
+            <Button fx:id="addAppleButton" layoutX="658.0" layoutY="374.0" mnemonicParsing="false" onAction="#addApple" text="Add Apple" />
+            <Button fx:id="addGoldButton" layoutX="658.0" layoutY="415.0" mnemonicParsing="false" onAction="#addGold" text="Add Gold" />
+            <Button fx:id="addHPpotionButton" layoutX="646.0" layoutY="457.0" mnemonicParsing="false" onAction="#addHPpotion" text="Add HPpotion" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="Stats" layoutX="15.0" layoutY="15.0" prefHeight="214.0" prefWidth="200.0">
@@ -54,5 +58,10 @@
             <Label layoutX="15.0" layoutY="71.0" text="Age:" />
          </children>
       </AnchorPane>
+      <TilePane fx:id="inventoryPane" hgap="5.0" layoutX="15.0" layoutY="440.0" prefColumns="3" prefRows="2" prefTileHeight="50.0" prefTileWidth="50.0" vgap="5.0">
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </TilePane>
    </children>
 </AnchorPane>

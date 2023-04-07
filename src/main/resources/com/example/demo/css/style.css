@@ -31,10 +31,41 @@
 #ageLabel, #healthLabel, #damageLabel, #armorLabel, #goldLabel, #speedLabel, #intLabel, #charLabel, #heightLabel, #energyLabel, #charLabel{
     -fx-text-fill: #C79E80;
 }
-
-
-
-
+#nextDayButton{
+    -fx-border-color: #836273 ;
+    -fx-border-width: 2;
+    -fx-text-fill: #836273;
+    -fx-font: 16px "Lucida Console";
+    -fx-padding: 10;
+    -fx-background-color: #E4D8CE;
+}
+#loginButton{
+    -fx-border-color: #836273 ;
+    -fx-border-width: 2;
+    -fx-text-fill: #836273;
+    -fx-font: 16px "Lucida Console";
+    -fx-padding: 10;
+    -fx-background-color: #E4D8CE;
+}
+#inventoryPane{
+    -fx-background-color: #0B1F2E;
+    -fx-border-color: #836273 ;
+    -fx-border-width: 2;
+}
+.invSlot{
+    -fx-background-color: #0F2A3F;
+    -fx-border-color: #836273 ;
+    -fx-border-width: 2;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+.newSlot{
+    -fx-background-color: #611720;
+    -fx-border-color: #836273 ;
+    -fx-border-width: 2;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
 
 
 
