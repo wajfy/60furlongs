@@ -17,8 +17,10 @@ public class Hero {
     private int heroIntelligence;
     private int heroCharisma;
     private int heroDamage;
-    private int heroArmor;
+    private int heroDefense;
     private Image heroImage;
+    private ItemArmor heroArmor;
+    private ItemWeapon heroWeapon;
 
     public Hero(String heroName, int heroAge, Image heroImage){
         this.heroName = heroName;
@@ -33,7 +35,7 @@ public class Hero {
         this.heroEnergy = InsideController.getRandomNumber(70, 100);
         this.heroMaxEnergy = 100;
         this.heroDamage = InsideController.getRandomNumber(5, 20);
-        this.heroArmor = InsideController.getRandomNumber(0, 10);
+        this.heroDefense = InsideController.getRandomNumber(0, 10);
         this.heroSpeed = InsideController.getRandomNumber(1, 5);
         this.heroIntelligence = InsideController.getRandomNumber(1, 5);
         this.heroCharisma = InsideController.getRandomNumber(1, 5);
@@ -67,8 +69,8 @@ public class Hero {
         return heroDamage;
     }
 
-    public int getHeroArmor() {
-        return heroArmor;
+    public int getHeroDefense() {
+        return heroDefense;
     }
 
     public Image getHeroImage() {
@@ -103,6 +105,14 @@ public class Hero {
         return heroCharisma;
     }
 
+    public ItemArmor getHeroArmor() {
+        return heroArmor;
+    }
+
+    public ItemWeapon getHeroWeapon() {
+        return heroWeapon;
+    }
+
     public void setHeroName(String heroName) {
         this.heroName = heroName;
     }
@@ -123,8 +133,8 @@ public class Hero {
         this.heroDamage = heroDamage;
     }
 
-    public void setHeroArmor(int heroArmor) {
-        this.heroArmor = heroArmor;
+    public void setHeroDefense(int heroDefense) {
+        this.heroDefense = heroDefense;
     }
 
     public void setHeroImage(Image heroImage) {
@@ -157,5 +167,13 @@ public class Hero {
 
     public void setHeroCharisma(int heroCharisma) {
         this.heroCharisma = heroCharisma;
+    }
+
+    public void setHeroArmor(ItemArmor heroArmor) {
+        this.heroArmor = heroArmor;
+    }
+
+    public void setHeroWeapon(ItemWeapon heroWeapon) {
+        this.heroWeapon = heroWeapon;
     }
 }

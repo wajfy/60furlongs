@@ -66,6 +66,20 @@
     -fx-background-radius: 5px;
     -fx-border-radius: 5px;
 }
+.loadSlot{
+    -fx-background-color: #0F2A3F;
+    -fx-border-color: #836273 ;
+    -fx-border-width: 2;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+.newLoadSlot{
+    -fx-background-color: #611720;
+    -fx-border-color: #836273 ;
+    -fx-border-width: 2;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
 
 
 

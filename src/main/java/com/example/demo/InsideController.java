@@ -45,6 +45,8 @@ public class InsideController implements Initializable {
 
     @FXML
     TilePane inventoryPane;
+    @FXML
+    TilePane loadoutPane;
 
     @FXML
     ImageView profilePicture;
@@ -59,6 +61,7 @@ public class InsideController implements Initializable {
     Hero hrdina;
     int dayNumber = 0;
     Inventory myInv;
+
     public static int getRandomNumber(int min, int max){
         return (int)Math.floor(Math.random() * (max - min + 1) + min);
     }
@@ -84,41 +87,39 @@ public class InsideController implements Initializable {
         heightLabel.setText(Integer.toString(hrdina.getHeroHeight()));
 
         damageLabel.setText(Integer.toString(hrdina.getHeroDamage()));
-        armorLabel.setText(Integer.toString(hrdina.getHeroArmor()));
+        armorLabel.setText(Integer.toString(hrdina.getHeroDefense()));
         speedLabel.setText(Integer.toString(hrdina.getHeroSpeed()));
         intLabel.setText(Integer.toString(hrdina.getHeroIntelligence()));
         charLabel.setText(Integer.toString(hrdina.getHeroCharisma()));
         displayInventory();
     }
     public void displayInventory(){
-        myInv = new Inventory(6, inventoryPane);
-
+        myInv = new Inventory(6, inventoryPane, loadoutPane);
     }
-
     public void nextDay(){
         dayNumber++;
         dayLabel.setText("Day: " + dayNumber);
         System.out.println("Moving to day: " + dayNumber);
     }
     public void addSword(){
-        int slot = Integer.parseInt(slotNumber.getText());
-        InventoryItem sword = new InventoryItem("firstSword", "this is first sword", "weapons/firstsword");
+        int slot = 0;
+        ItemWeapon sword = new ItemWeapon("firstSword", "this is first sword", "weapons/firstsword", 20,ItemType.WEAPON ,50);
         myInv.addItem(sword, slot);
     }
     public void addApple(){
-        int slot = Integer.parseInt(slotNumber.getText());
-        InventoryItem sword = new InventoryItem("Apple", "Click to use. This apple will add 20HP", "Apple");
-        myInv.addItem(sword, slot);
+        int slot = 0;
+        ItemHeal apple = new ItemHeal("Apple", "Click to use. This apple will add 20HP", "Apple", 10,ItemType.HEAL ,20);
+        myInv.addItem(apple, slot);
     }
     public void addGold(){
-        int slot = Integer.parseInt(slotNumber.getText());
-        InventoryItem sword = new InventoryItem("Gold bar", "You can sell this gold bar for gold", "Gold");
-        myInv.addItem(sword, slot);
+        int slot = 0;
+        InventoryItem goldBar = new InventoryItem("Gold bar", "You can sell this gold bar for gold", "Gold", 500,ItemType.JUNK);
+        myInv.addItem(goldBar, slot);
     }
     public void addHPpotion(){
-        int slot = Integer.parseInt(slotNumber.getText());
-        InventoryItem sword = new InventoryItem("Potion of health", "Click to use. This potion will add 75HP", "HPpotion");
-        myInv.addItem(sword, slot);
+        int slot = 0;
+        ItemHeal HPpotion = new ItemHeal("Potion of health", "Click to use. This potion will add 75HP", "HPpotion", 50,ItemType.HEAL, 75);
+        myInv.addItem(HPpotion, slot);
     }
 
     @Override
