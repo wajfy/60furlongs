@@ -28,10 +28,10 @@
             </Label>
             <Button fx:id="nextDayButton" layoutX="660.0" layoutY="523.0" mnemonicParsing="false" onAction="#nextDay" text="Next day" />
             <Button fx:id="addSwordButton" layoutX="658.0" layoutY="333.0" mnemonicParsing="false" onAction="#addSword" text="Add Sword" />
-            <TextField fx:id="slotNumber" layoutX="330.0" layoutY="339.0" />
             <Button fx:id="addAppleButton" layoutX="658.0" layoutY="374.0" mnemonicParsing="false" onAction="#addApple" text="Add Apple" />
             <Button fx:id="addGoldButton" layoutX="658.0" layoutY="415.0" mnemonicParsing="false" onAction="#addGold" text="Add Gold" />
             <Button fx:id="addHPpotionButton" layoutX="646.0" layoutY="457.0" mnemonicParsing="false" onAction="#addHPpotion" text="Add HPpotion" />
+            <StackPane fx:id="infoPane" layoutX="14.0" layoutY="340.0" visible="false" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="Stats" layoutX="15.0" layoutY="15.0" prefHeight="214.0" prefWidth="200.0">

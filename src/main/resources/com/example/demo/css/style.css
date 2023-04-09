@@ -80,6 +80,11 @@
     -fx-background-radius: 5px;
     -fx-border-radius: 5px;
 }
+.infoPane{
+    -fx-background-color: #0B1F2E;
+    -fx-border-color: #836273 ;
+    -fx-border-width: 2;
+}
 
 
 

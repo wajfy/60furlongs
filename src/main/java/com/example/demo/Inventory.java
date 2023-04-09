@@ -3,6 +3,7 @@ package com.example.demo;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Orientation;
+import javafx.scene.control.Label;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -29,8 +30,11 @@ public class Inventory {
     private int loadoutSize = 2;
     private Image emptySwordIMG = new Image(Objects.requireNonNull(getClass().getResourceAsStream("img/items/weapons/emptySword.png")));
     private Image emptyArmorIMG = new Image(Objects.requireNonNull(getClass().getResourceAsStream("img/items/armors/emptyArmor.png")));
-    public Inventory(int inventorySize, TilePane invTilePane, TilePane loadoutPane){
+    StackPane infoPane;
+    public Inventory(int inventorySize, TilePane invTilePane, TilePane loadoutPane, StackPane infoPane){
         //building inv
+        this.infoPane = infoPane;
+        this.infoPane.getStyleClass().add("infoPane");
         this.itemsCount = 0;
         this.inventorySize = inventorySize;
         this.inventory = new InventoryItem[this.inventorySize];
@@ -94,6 +98,7 @@ public class Inventory {
                 showItemInfo(item);
             });
             newSlot.setOnMouseExited(event -> {
+
                 removeItemInfo(item);
             });
             if(item.getItemType() == ItemType.WEAPON){
@@ -127,6 +132,14 @@ public class Inventory {
         System.out.println("using healing item");
     }
     public void showItemInfo(InventoryItem item) {
+        this.infoPane.setVisible(true);
+        Label itemInfoLabel = new Label();
+        String itemInfoText =
+                "Name: " + item.getItemName() + "\n" +
+                "Description: " + item.getItemDescription() + "\n" +
+                "Type: " + item.getItemType() + "\n" +
+                "Value: " + item.getItemValue();
+
         System.out.println("Name: " + item.getItemName());
         System.out.println("Description: " + item.getItemDescription());
         System.out.println("Type: " + item.getItemType());
@@ -137,6 +150,7 @@ public class Inventory {
                 try {
                     int damage = (int) Mdamage.invoke(item);
                     System.out.println("Damage: " + damage);
+                    itemInfoText += "\nDamage: " + damage;
                 } catch (InvocationTargetException | IllegalAccessException e) {
                     throw new RuntimeException(e);
                 }
@@ -149,6 +163,7 @@ public class Inventory {
                 try {
                     int HP = (int) MHP.invoke(item);
                     System.out.println("HP: " + HP);
+                    itemInfoText += "\nHP: " + HP;
                 } catch (InvocationTargetException | IllegalAccessException e) {
                     throw new RuntimeException(e);
                 }
@@ -161,6 +176,7 @@ public class Inventory {
                 try {
                     int defense = (int) Mdefense.invoke(item);
                     System.out.println("Defense: " + defense);
+                    itemInfoText += "\nDefense: " + defense;
                 } catch (InvocationTargetException | IllegalAccessException e) {
                     throw new RuntimeException(e);
                 }
@@ -168,9 +184,14 @@ public class Inventory {
                 System.out.println(e.toString());
             }
         }
+        itemInfoLabel.setText(itemInfoText);
+        itemInfoLabel.setWrapText(true);
+        infoPane.getChildren().add(itemInfoLabel);
     }
     public void removeItemInfo(InventoryItem item){
         System.out.println("Mouse exited from: " + item.getItemName());
+        this.infoPane.getChildren().clear();
+        this.infoPane.setVisible(false);
     }
     public void showInventoryArray(){
         for (int i = 0; i < inventory.length; i++){

@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 
 import java.net.URL;
@@ -15,8 +16,6 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class InsideController implements Initializable {
-    @FXML
-    TextField slotNumber;
     @FXML
     Label nameLabel;
     @FXML
@@ -61,6 +60,8 @@ public class InsideController implements Initializable {
     Hero hrdina;
     int dayNumber = 0;
     Inventory myInv;
+    @FXML
+    StackPane infoPane;
 
     public static int getRandomNumber(int min, int max){
         return (int)Math.floor(Math.random() * (max - min + 1) + min);
@@ -94,7 +95,7 @@ public class InsideController implements Initializable {
         displayInventory();
     }
     public void displayInventory(){
-        myInv = new Inventory(6, inventoryPane, loadoutPane);
+        myInv = new Inventory(6, inventoryPane, loadoutPane, infoPane);
     }
     public void nextDay(){
         dayNumber++;
