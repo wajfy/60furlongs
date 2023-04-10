@@ -77,7 +77,7 @@ public class InsideController implements Initializable {
     }
     public void displayInfo(){
         System.out.println("Displaying info");
-        nameLabel.setText(hrdina.getHeroName());
+        nameLabel.setText(this.hrdina.getHeroName());
         profilePicture.setImage(hrdina.getHeroImage());
 
         goldLabel.setText(Integer.toString(hrdina.getHeroGold()));
@@ -92,12 +92,12 @@ public class InsideController implements Initializable {
         speedLabel.setText(Integer.toString(hrdina.getHeroSpeed()));
         intLabel.setText(Integer.toString(hrdina.getHeroIntelligence()));
         charLabel.setText(Integer.toString(hrdina.getHeroCharisma()));
-        displayInventory();
     }
     public void displayInventory(){
-        myInv = new Inventory(6, inventoryPane, loadoutPane, infoPane);
+        myInv = new Inventory(6, inventoryPane, loadoutPane, infoPane, this.hrdina, healthLabel);
     }
     public void nextDay(){
+        System.out.println(this.hrdina.getHeroName());
         dayNumber++;
         dayLabel.setText("Day: " + dayNumber);
         System.out.println("Moving to day: " + dayNumber);
@@ -105,22 +105,19 @@ public class InsideController implements Initializable {
     public void addSword(){
         int slot = 0;
         ItemWeapon sword = new ItemWeapon("firstSword", "this is first sword", "weapons/firstsword", 20,ItemType.WEAPON ,50);
-        myInv.addItem(sword, slot);
+        myInv.addItem(sword);
     }
     public void addApple(){
-        int slot = 0;
         ItemHeal apple = new ItemHeal("Apple", "Click to use. This apple will add 20HP", "Apple", 10,ItemType.HEAL ,20);
-        myInv.addItem(apple, slot);
+        myInv.addItem(apple);
     }
     public void addGold(){
-        int slot = 0;
         InventoryItem goldBar = new InventoryItem("Gold bar", "You can sell this gold bar for gold", "Gold", 500,ItemType.JUNK);
-        myInv.addItem(goldBar, slot);
+        myInv.addItem(goldBar);
     }
     public void addHPpotion(){
-        int slot = 0;
         ItemHeal HPpotion = new ItemHeal("Potion of health", "Click to use. This potion will add 75HP", "HPpotion", 50,ItemType.HEAL, 75);
-        myInv.addItem(HPpotion, slot);
+        myInv.addItem(HPpotion);
     }
 
     @Override

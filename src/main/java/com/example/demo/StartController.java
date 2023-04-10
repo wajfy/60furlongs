@@ -46,6 +46,7 @@ public class StartController {
             InsideController insideCon = loader.getController();
             insideCon.createNewHero(username, age);
             insideCon.displayInfo();
+            insideCon.displayInventory();
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root, width, height);
             String css = Objects.requireNonNull(this.getClass().getResource("css/style.css")).toExternalForm();

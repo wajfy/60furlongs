@@ -2,7 +2,9 @@ package com.example.demo;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Orientation;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
@@ -12,6 +14,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -31,7 +34,11 @@ public class Inventory {
     private Image emptySwordIMG = new Image(Objects.requireNonNull(getClass().getResourceAsStream("img/items/weapons/emptySword.png")));
     private Image emptyArmorIMG = new Image(Objects.requireNonNull(getClass().getResourceAsStream("img/items/armors/emptyArmor.png")));
     StackPane infoPane;
-    public Inventory(int inventorySize, TilePane invTilePane, TilePane loadoutPane, StackPane infoPane){
+    Hero hero;
+    Label hpLabel;
+    public Inventory(int inventorySize, TilePane invTilePane, TilePane loadoutPane, StackPane infoPane, Hero hero, Label hpLabel){
+        this.hpLabel = hpLabel;
+        this.hero = hero;
         //building inv
         this.infoPane = infoPane;
         this.infoPane.getStyleClass().add("infoPane");
@@ -80,46 +87,80 @@ public class Inventory {
         System.out.println("Building loadout panel finished");
         loadoutPane.setOrientation(Orientation.HORIZONTAL);
     }
-    public void addItem(InventoryItem item, int slot) {
-        slot = itemsCount;
+    public void addItem(InventoryItem item) {
         if (itemsCount < this.inventorySize) {
-            StackPane newSlot = new StackPane();
-            newSlot.setPrefHeight(50);
-            newSlot.setPrefWidth(50);
-            newSlot.setId("newSlot" + slot);
-            newSlot.getStyleClass().add("newSlot");
-
-            ImageView slotImg = new ImageView(item.getItemImage());
-            slotImg.setFitHeight(40);
-            slotImg.setFitWidth(40);
-            newSlot.getChildren().add(slotImg);
-
-            newSlot.setOnMouseEntered(event -> {
-                showItemInfo(item);
-            });
-            newSlot.setOnMouseExited(event -> {
-
-                removeItemInfo(item);
-            });
-            if(item.getItemType() == ItemType.WEAPON){
-                newSlot.setOnMouseClicked(event -> {
-                    equipWeapon();
-                });
-            } else if (item.getItemType() == ItemType.ARMOR) {
-                newSlot.setOnMouseClicked(event -> {
-                    equipArmor();
-                });
-            }else if (item.getItemType() == ItemType.HEAL) {
-                newSlot.setOnMouseClicked(event -> {
-                    useHealItem();
-                });
+            boolean placed = false;
+            int index = 0;
+            while(!placed){
+                if(inventory[index] != null){
+                    System.out.println("This slot is occupied");
+                }else{
+                    System.out.println("This slot is not occupied");
+                    inventory[index] = item;
+                    placed = true;
+                }
+                index++;
             }
             itemsCount++;
-            inventory[slot] = item;
-            this.invTilePane.getChildren().set(slot, newSlot);
+            refreshInventory();
             showInventoryArray();
         }else{
             System.out.println("Cannot add more items, inventory is full");
+        }
+    }
+    public void removeItem(int index){
+        System.out.println("removing item: " + inventory[index].getItemName() + " on index: " + index);
+        inventory[index] = null;
+        itemsCount--;
+        refreshInventory();
+    }
+    public void refreshInventory(){
+        for(int i = 0; i < inventory.length; i++){
+            if(inventory[i] != null){
+                InventoryItem item = inventory[i];
+                StackPane newSlot = new StackPane();
+                newSlot.setPrefHeight(50);
+                newSlot.setPrefWidth(50);
+                newSlot.setId("newSlot" + i);
+                newSlot.getStyleClass().add("newSlot");
+
+                ImageView slotImg = new ImageView(item.getItemImage());
+                slotImg.setFitHeight(40);
+                slotImg.setFitWidth(40);
+                newSlot.getChildren().add(slotImg);
+
+                newSlot.setOnMouseEntered(event -> {
+                    showItemInfo(item);
+                });
+                newSlot.setOnMouseExited(event -> {
+
+                    removeItemInfo(item);
+                });
+                if(item.getItemType() == ItemType.WEAPON){
+                    newSlot.setOnMouseClicked(event -> {
+                        equipWeapon();
+                        removeItem(invTilePane.getChildren().indexOf(newSlot));
+                    });
+                } else if (item.getItemType() == ItemType.ARMOR) {
+                    newSlot.setOnMouseClicked(event -> {
+                        equipArmor();
+                        removeItem(invTilePane.getChildren().indexOf(newSlot));
+                    });
+                }else if (item.getItemType() == ItemType.HEAL) {
+                    newSlot.setOnMouseClicked(event -> {
+                        useHealItem(item);
+                        removeItem(invTilePane.getChildren().indexOf(newSlot));
+                    });
+                }
+                this.invTilePane.getChildren().set(i, newSlot);
+            }else{
+                StackPane slot = new StackPane();
+                slot.getStyleClass().add("invSlot");
+                slot.setId("invSlot" + i);
+                slot.setPrefHeight(50);
+                slot.setPrefWidth(50);
+                invTilePane.getChildren().set(i, slot);
+            }
         }
     }
     public void equipWeapon(){
@@ -128,8 +169,61 @@ public class Inventory {
     public void equipArmor(){
         System.out.println("equiping armor");
     }
-    public void useHealItem(){
+    public void useHealItem(InventoryItem item) {
         System.out.println("using healing item");
+        this.hero.setHeroHealth(this.hero.getHeroHealth() + getItemHP(item));
+        if(this.hero.getHeroHealth() > this.hero.getHeroMaxHealth()){
+            this.hero.setHeroHealth(this.hero.getHeroMaxHealth());
+        }
+        hpLabel.setText(this.hero.getHeroHealth() + "/" + this.hero.getHeroMaxHealth());
+    }
+    public int getItemHP(InventoryItem item){
+        int HP = 0;
+        if (item.getItemType() == ItemType.HEAL) {
+            try {
+                Method MHP = item.getClass().getMethod("getHealHP", null);
+                try {
+                    HP = (int) MHP.invoke(item);
+                } catch (InvocationTargetException | IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+            } catch (NoSuchMethodException e) {
+                System.out.println(e.toString());
+            }
+        }
+        return HP;
+    }
+    public int getItemDefense(InventoryItem item){
+        int defense = 0;
+        if (item.getItemType() == ItemType.ARMOR) {
+            try {
+                Method Mdefense = item.getClass().getMethod("getArmorDefense", null);
+                try {
+                    defense = (int) Mdefense.invoke(item);
+                } catch (InvocationTargetException | IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+            } catch (NoSuchMethodException e) {
+                System.out.println(e.toString());
+            }
+        }
+        return defense;
+    }
+    public int getItemDamage(InventoryItem item){
+        int damage = 0;
+        if(item.getItemType() == ItemType.WEAPON) {
+            try {
+                Method Mdamage = item.getClass().getMethod("getWeaponDamage", null);
+                try {
+                    damage = (int) Mdamage.invoke(item);
+                } catch (InvocationTargetException | IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+            } catch (NoSuchMethodException e) {
+                System.out.println(e.toString());
+            }
+        }
+        return damage;
     }
     public void showItemInfo(InventoryItem item) {
         this.infoPane.setVisible(true);
@@ -139,57 +233,17 @@ public class Inventory {
                 "Description: " + item.getItemDescription() + "\n" +
                 "Type: " + item.getItemType() + "\n" +
                 "Value: " + item.getItemValue();
+                itemInfoText += "\nDamage: " + getItemDamage(item);
 
-        System.out.println("Name: " + item.getItemName());
-        System.out.println("Description: " + item.getItemDescription());
-        System.out.println("Type: " + item.getItemType());
-        System.out.println("Value: " + item.getItemValue());
-        if(item.getItemType() == ItemType.WEAPON) {
-            try {
-                Method Mdamage = item.getClass().getMethod("getWeaponDamage", null);
-                try {
-                    int damage = (int) Mdamage.invoke(item);
-                    System.out.println("Damage: " + damage);
-                    itemInfoText += "\nDamage: " + damage;
-                } catch (InvocationTargetException | IllegalAccessException e) {
-                    throw new RuntimeException(e);
-                }
-            } catch (NoSuchMethodException e) {
-                System.out.println(e.toString());
-            }
-        } else if (item.getItemType() == ItemType.HEAL) {
-            try {
-                Method MHP = item.getClass().getMethod("getHealHP", null);
-                try {
-                    int HP = (int) MHP.invoke(item);
-                    System.out.println("HP: " + HP);
-                    itemInfoText += "\nHP: " + HP;
-                } catch (InvocationTargetException | IllegalAccessException e) {
-                    throw new RuntimeException(e);
-                }
-            } catch (NoSuchMethodException e) {
-                System.out.println(e.toString());
-            }
-        }else if (item.getItemType() == ItemType.ARMOR) {
-            try {
-                Method Mdefense = item.getClass().getMethod("getArmorDefense", null);
-                try {
-                    int defense = (int) Mdefense.invoke(item);
-                    System.out.println("Defense: " + defense);
-                    itemInfoText += "\nDefense: " + defense;
-                } catch (InvocationTargetException | IllegalAccessException e) {
-                    throw new RuntimeException(e);
-                }
-            } catch (NoSuchMethodException e) {
-                System.out.println(e.toString());
-            }
-        }
+                itemInfoText += "\nHP: " + getItemHP(item);
+
+                itemInfoText += "\nDefense: " + getItemDefense(item);
+
         itemInfoLabel.setText(itemInfoText);
         itemInfoLabel.setWrapText(true);
         infoPane.getChildren().add(itemInfoLabel);
     }
     public void removeItemInfo(InventoryItem item){
-        System.out.println("Mouse exited from: " + item.getItemName());
         this.infoPane.getChildren().clear();
         this.infoPane.setVisible(false);
     }

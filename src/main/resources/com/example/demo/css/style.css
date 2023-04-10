@@ -66,6 +66,9 @@
     -fx-background-radius: 5px;
     -fx-border-radius: 5px;
 }
+.newSlot:hover{
+    -fx-border-color: #FFFFFF;
+}
 .loadSlot{
     -fx-background-color: #0F2A3F;
     -fx-border-color: #836273 ;
