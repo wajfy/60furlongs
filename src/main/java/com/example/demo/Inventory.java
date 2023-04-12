@@ -170,12 +170,17 @@ public class Inventory {
         System.out.println("equiping armor");
     }
     public void useHealItem(InventoryItem item) {
-        System.out.println("using healing item");
-        this.hero.setHeroHealth(this.hero.getHeroHealth() + getItemHP(item));
-        if(this.hero.getHeroHealth() > this.hero.getHeroMaxHealth()){
-            this.hero.setHeroHealth(this.hero.getHeroMaxHealth());
+        if(this.hero.getHeroHealth() != this.hero.getHeroMaxHealth()){
+            System.out.println("using healing item");
+            this.hero.setHeroHealth(this.hero.getHeroHealth() + getItemHP(item));
+            if(this.hero.getHeroHealth() > this.hero.getHeroMaxHealth()){
+                this.hero.setHeroHealth(this.hero.getHeroMaxHealth());
+            }
+            hpLabel.setText(this.hero.getHeroHealth() + "/" + this.hero.getHeroMaxHealth());
+        }else{
+            System.out.println("You have full hp");
         }
-        hpLabel.setText(this.hero.getHeroHealth() + "/" + this.hero.getHeroMaxHealth());
+
     }
     public int getItemHP(InventoryItem item){
         int HP = 0;
