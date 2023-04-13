@@ -32,6 +32,7 @@
             <Button fx:id="addGoldButton" layoutX="658.0" layoutY="415.0" mnemonicParsing="false" onAction="#addGold" text="Add Gold" />
             <Button fx:id="addHPpotionButton" layoutX="646.0" layoutY="457.0" mnemonicParsing="false" onAction="#addHPpotion" text="Add HPpotion" />
             <StackPane fx:id="infoPane" layoutX="14.0" layoutY="340.0" visible="false" />
+            <Button fx:id="addArmorButton" layoutX="658.0" layoutY="292.0" mnemonicParsing="false" onAction="#addArmor" text="Add Armor" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="Stats" layoutX="15.0" layoutY="15.0" prefHeight="214.0" prefWidth="200.0">

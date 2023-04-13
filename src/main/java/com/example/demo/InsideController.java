@@ -94,7 +94,7 @@ public class InsideController implements Initializable {
         charLabel.setText(Integer.toString(hrdina.getHeroCharisma()));
     }
     public void displayInventory(){
-        myInv = new Inventory(6, inventoryPane, loadoutPane, infoPane, this.hrdina, healthLabel);
+        myInv = new Inventory(6, inventoryPane, loadoutPane, infoPane, this.hrdina, healthLabel, damageLabel, armorLabel);
     }
     public void nextDay(){
         System.out.println(this.hrdina.getHeroName());
@@ -102,8 +102,11 @@ public class InsideController implements Initializable {
         dayLabel.setText("Day: " + dayNumber);
         System.out.println("Moving to day: " + dayNumber);
     }
+    public void addArmor(){
+        ItemArmor armor = new ItemArmor("Hide armor", "this is first armor", "armors/hideArmor", 20,ItemType.ARMOR ,20);
+        myInv.addItem(armor);
+    }
     public void addSword(){
-        int slot = 0;
         ItemWeapon sword = new ItemWeapon("firstSword", "this is first sword", "weapons/firstsword", 20,ItemType.WEAPON ,50);
         myInv.addItem(sword);
     }
@@ -112,7 +115,17 @@ public class InsideController implements Initializable {
         myInv.addItem(apple);
     }
     public void addGold(){
-        InventoryItem goldBar = new InventoryItem("Gold bar", "You can sell this gold bar for gold", "Gold", 500,ItemType.JUNK);
+        InventoryItem goldBar = new InventoryItem("Gold bar", "You can sell this gold bar for gold", "Gold", 500, ItemType.JUNK) {
+            @Override
+            public int getItemStat() {
+                return 0;
+            }
+
+            @Override
+            public void setItemStat(int value) {
+
+            }
+        };
         myInv.addItem(goldBar);
     }
     public void addHPpotion(){
@@ -122,7 +135,13 @@ public class InsideController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+//        while(true){
+//            try {
+//                myInv.refreshInventory();
+//            }catch (Exception e){
+//                System.out.println(e);
+//            }
+//        }
     }
 
 }

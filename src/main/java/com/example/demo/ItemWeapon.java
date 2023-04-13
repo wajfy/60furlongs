@@ -7,11 +7,13 @@ public class ItemWeapon extends InventoryItem{
         this.weaponDamage = weaponDamage;
     }
 
-    public int getWeaponDamage() {
-        return weaponDamage;
+    @Override
+    public int getItemStat() {
+        return this.weaponDamage;
     }
 
-    public void setWeaponDamage(int weaponDamage) {
-        this.weaponDamage = weaponDamage;
+    @Override
+    public void setItemStat(int value){
+        this.weaponDamage = value;
     }
 }

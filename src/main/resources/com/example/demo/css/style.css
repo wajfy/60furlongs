@@ -83,6 +83,9 @@
     -fx-background-radius: 5px;
     -fx-border-radius: 5px;
 }
+.newLoadSlot:hover{
+    -fx-border-color: #FFFFFF;
+}
 .infoPane{
     -fx-background-color: #0B1F2E;
     -fx-border-color: #836273 ;

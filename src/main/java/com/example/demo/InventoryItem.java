@@ -4,12 +4,13 @@ import javafx.scene.image.Image;
 
 import java.util.Objects;
 
-public class InventoryItem {
+public abstract class InventoryItem {
     private String itemName;
     private String itemDescription;
     private Image itemImage;
     private int itemValue;
     private ItemType itemType;
+    private int itemStat;
     public InventoryItem(String itemName, String itemDescription, String itemImagePath, int itemValue, ItemType itemType){
         this.itemName = itemName;
         this.itemDescription = itemDescription;
@@ -58,4 +59,8 @@ public class InventoryItem {
     public void setItemType(ItemType itemType) {
         this.itemType = itemType;
     }
+
+    public abstract int getItemStat();
+
+    public abstract void setItemStat(int value);
 }

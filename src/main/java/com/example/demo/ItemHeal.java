@@ -14,4 +14,14 @@ public class ItemHeal extends InventoryItem{
     public void setHealHP(int healHP) {
         this.healHP = healHP;
     }
+
+    @Override
+    public int getItemStat() {
+        return this.healHP;
+    }
+
+    @Override
+    public void setItemStat(int value){
+        this.healHP = value;
+    }
 }

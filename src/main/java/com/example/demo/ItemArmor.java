@@ -14,4 +14,14 @@ public class ItemArmor extends InventoryItem{
     public void setArmorDefense(int armorDefense) {
         this.armorDefense = armorDefense;
     }
+
+    @Override
+    public int getItemStat() {
+        return this.armorDefense;
+    }
+
+    @Override
+    public void setItemStat(int value){
+        this.armorDefense = value;
+    }
 }
